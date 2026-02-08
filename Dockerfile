@@ -2,16 +2,15 @@
 FROM node:18-alpine as build-stage
 WORKDIR /app
 
-# Copy package files first for better caching
+# Declarar el argumento para la URL de la API
+ARG VUE_APP_API_URL
+ENV VUE_APP_API_URL=$VUE_APP_API_URL
+
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the rest of the frontend code
 COPY . .
 
-# Build the app
+# El build ahora verá la variable VUE_APP_API_URL
 RUN npm run build
 
 # Production stage
