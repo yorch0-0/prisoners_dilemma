@@ -225,7 +225,8 @@ export default createStore({
         strategy_pB: payload.strategy.playerB,
         w: payload.w,
       };
-      const response = await fetch("http://localhost:5000/years2pay", {
+      const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:5000";
+      const response = await fetch(`${apiUrl}/years2pay`, {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -236,11 +237,12 @@ export default createStore({
       commit("setResults", result);
     },
     async startServ({ commit }, payload) {
-      const response = await fetch("http://localhost:5000/startServ", {
+      const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:5000";
+      const response = await fetch(`${apiUrl}/startServ`, {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(reqBody),
+        body: JSON.stringify(payload),
       });
       const result = await response.json();
       console.log(result);

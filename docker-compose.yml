@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   backend:
     build:
@@ -20,5 +18,3 @@ services:
       - "80:80"
     depends_on:
       - backend
-    # Note: If you want to use the production build served by Nginx, access it at localhost:8080
-    # If you need real-time dev updates, you might want a dev-specific docker-compose or mount volumes.
